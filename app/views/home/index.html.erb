@@ -1,0 +1,38 @@
+<br>
+<% if admin_signed_in? %>
+    <div class="alert alert-dismissible alert-light">
+        <% if current_admin.avatar.attached? %>
+            <%= image_tag current_admin.avatar.variant(resize: "50x50!") %>
+        <% end %>
+        <h1><%= current_admin.name %></h1>
+        <figure>
+            <blockquote class="blockquote">
+                <p class="mb-0">Bem vindo a plataforma de cursos da Unilexia</p>
+            </blockquote>
+        </figure>
+    </div> 
+<% elsif user_signed_in? %>
+    <div class="alert alert-dismissible alert-light">
+        <% if current_user.avatar.attached? %>
+            <%= image_tag current_user.avatar.variant(resize: "50x50!") %>
+        <% end %>
+        <h1><%= current_user.name %></h1>
+        <figure>
+            <blockquote class="blockquote">
+                <p class="mb-0">Bem vindo a plataforma de cursos da Unilexia</p>
+            </blockquote>
+        </figure>       
+    </div>            
+<% else %>
+    <div class="alert alert-dismissible alert-light">
+        <h1>Bem vindo a plataforma de cursos da Unilexia</h1>
+        <figure>
+            <blockquote class="blockquote">
+                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+                Someone famous in <cite title="Source Title">Source Title</cite>
+            </figcaption>
+        </figure>
+    </div> 
+<% end %>

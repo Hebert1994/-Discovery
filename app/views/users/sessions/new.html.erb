@@ -1,0 +1,69 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" integrity="sha256-3sPp8BkKUE7QyPSl6VfBByBroQbKxKG7tsusY2mhbVY=" crossorigin="anonymous" />
+<br>
+<div class="row">
+  <div class="col-md-11 mt-60 mx-md-auto">
+    <div class="login-box bg-white pl-lg-5 pl-0">
+      <div class="row no-gutters align-items-center">
+        <div class="col-md-6">
+            <div class="form-wrap bg-white">
+              <h4 class="btm-sep pb-3 mb-5">Login</h4>
+                <div class="row">
+                  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                    <div class="col-12">
+                      <div class="form-group position-relative">
+                        <span class="zmdi zmdi-account"></span>
+                        <%= f.email_field :email, autofocus: true, class:"form-control", placeholder: "Email", required: false %>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="col-12">
+                      <div class="form-group position-relative">
+                          <span class="zmdi zmdi-email"></span>
+                          <%= f.password_field :password, class: "form-control", placeholder: "Senha", required: false %>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="checkbox">
+                      <label>
+                      <%= f.check_box :remember_me, required: false, as: :boolean if devise_mapping.rememberable? %> Lembrar-me
+                      </label>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                      <%= f.submit "Entrar", class: "btn btn-primary" %>
+                    </div>
+                  <% end %>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+          <div class="content text-center"> 
+              <div class="border-bottom pb-5 mb-5">
+                <p>
+                  <%= image_tag("logov.png", :width=>100) %>
+                </p>
+              </div>
+              <h5 class="c-black mb-4 mt-n1">Siga nas redes sociais</h5>
+              <div>
+                <a>    
+                    <%= link_to 'https://www.instagram.com/unilexia/' do %>
+                        <%= image_tag("instagram.png", :width=>32)%>
+                    <% end %>
+                </a>
+                <a>    
+                    <%= link_to 'https://www.facebook.com/Unilexia-Startup-114268924497145' do %>
+                        <%= image_tag("face.png", :width=>32)%>
+                    <% end %>
+                </a>
+                <a>
+                    <%= link_to 'mailto:unilexiaapp@gmail.com' do %>
+                        <%= image_tag("email.png", :width=>32)%>
+                    <% end %>
+                </a>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<br>
+<div class="alert alert-dismissible alert-light">
+    <%= div_for(comment) do %>
+        <div class="comments_wrapper clearfix">
+            <div class="pull-left">
+                <p class="lead"><%= comment.body %></p>
+                <% if current_user.avatar.attached? %>
+                    <p><%= image_tag current_user.avatar.variant(resize: "20x20!")%><small> <strong> <%= comment.user.name %></strong> a <%= time_ago_in_words(comment.created_at) %> de agora</small></p>
+                <% else %>
+                    <p><small> <strong> <%= comment.user.name %></strong> a <%= time_ago_in_words(comment.created_at) %> de agora</small></p>
+                <% end %>
+            </div>
+            <div class="btn-group pull-right">
+                <% if comment.user == current_user %>
+                    <%= link_to 'Deletar', comment, method: :delete, data: { confirm: 'Deseja apagar o comentario?' }, class: "btn btn-danger" %>
+                <% end %>
+            </div>
+        </div>
+    <% end %>
+</div>

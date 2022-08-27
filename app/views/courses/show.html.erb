@@ -1,0 +1,60 @@
+<div class="page-header">
+  <div class="alert alert-dismissible alert-secondary">
+    <h1>
+      <h2><%= @course.title %></h2><br>
+    </h1>
+    <p>
+      <%= video_tag(url_for(@course.video), :width=>800, controls: '') %>
+    </p>
+    <p>
+      <strong>Module:</strong>
+      <%= @course.module %>
+    </p>
+    <p>
+      <strong>Description:</strong>
+      <%= @course.description %>
+    </p>
+    <div class="btn-group pull-right">
+      <%= link_to like_course_path(@course), method: :put, class: "btn btn-info btn-sm" do %>
+        <span class="glyphicon glyphicon-chevron-up"></span>
+        Like
+        <%= @course.get_upvotes.size %>
+      <% end %>
+      <%= link_to dislike_course_path(@course), method: :put, class: "btn btn-ligh btn-sm" do %>
+        <span class="glyphicon glyphicon-chevron-down"></span>
+        Dislike
+        <%= @course.get_downvotes.size %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% if @course.admin == current_admin %>
+  <div class="alert alert-dismissible alert-success">
+  <div class="btn-group">
+    <%= link_to 'Editar', edit_course_path(@course), class: "btn btn-info" %>
+    <%= link_to 'Deletar', @course, method: :delete, data: { confirm: 'Deseja deletar esse item?' }, class: "btn btn-danger" %>
+  </div>
+  </div>
+  <br>
+<% end %>
+<br>
+<div class="alert alert-dismissible alert-secondary">
+  <h4 class="comments_title">
+  <%= @course.comments.count %> Comentarios
+  </h4>
+  <% if user_signed_in? %>
+    <%= simple_form_for [@course, Comment.new] do |f| %>
+      <div class="field">
+        <%= f.text_area :body, class: "form-control" %>
+      </div>
+      <br>
+      <%= f.submit "Comentar", class: "btn btn-primary" %>
+    <% end %>
+  <% end %>
+  <div id="comments">
+    <%= render :partial => @course.comments %>
+  </div>
+</div>
+
+
+

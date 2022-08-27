@@ -1,0 +1,68 @@
+<% @courses.each do |course| %>
+  <br>
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title"><%= link_to course.title, course %></h4>
+      <p><%= image_tag(course.thumbnail, :width=>300) %></p>
+      <h6 class="card-subtitle mb-2 text-muted"> <%= course.module %></h6>
+      <p>
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Description
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <p class="card-text"><%= course.description %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </p>
+      
+        <div class="btn-group">
+          <%= button_to like_course_path(course), method: :put do %>
+            Like
+            <%= course.get_upvotes.size %>
+          <% end %>
+          <%= button_to dislike_course_path(course), method: :put do %>
+            Dislike
+            <%= course.get_downvotes.size %>
+          <% end %>
+        </div>
+    </div>
+  </div>
+<% end %>
+
+ 
+<section class="light">
+  <div class="container py-2">
+    <div class="h1 text-center text-dark" id="pageHeaderTitle">Material do curso</div>
+    <% @courses.each do |course| %>
+      <article class="postcard light blue">
+        <a class="postcard__img_link" href="">
+          <%= image_tag(url_for(course.thumbnail), class: "postcard__img", alt:  "Image Title") %>
+        </a>
+        <div class="postcard__text t-dark">
+          <h1 class="postcard__title blue"> <%= link_to course.title, course %></h1>
+          <div class="postcard__subtitle small">
+            <time datetime="2020-05-25 12:00:00">
+              <i class="fas fa-calendar-alt mr-2"></i><%= course.module %>
+            </time>
+          </div>
+          <div class="postcard__bar"></div>
+          <div class="postcard__preview-txt"><%= course.description %></div>
+
+          <ul class="postcard__tagbox">
+            <li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+            <li class="tag__item play blue">
+              <a href="#"><i class="fas fa-play mr-2"></i>Play Episode</a>
+            </li>
+          </ul>
+        </div>
+      </article>
+    <% end %>
+  </div>
+</section>

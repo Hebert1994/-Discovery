@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Discovery</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+  </head>
+
+  <body style="background-image: url(<%= image_path("wall.jpg")%>); background-size: 100%;">
+    
+    <% if admin_signed_in? %>
+      <%= render 'shared/navbarAdmin'%>
+    <% elsif user_signed_in? %>
+      <%= render 'shared/navbarUser'%>
+    <% else %>
+      <%= render 'shared/navbarHome'%>
+    <% end %>
+    
+
+    <div id="main_content" class="container">
+      <% flash.each do |name, msg| %>
+        <%= content_tag(:div, msg, class: "alert alert-#{name}") %>
+      <% end %>
+        <div id="content" class="col-md-9 center-block">
+          <%= yield %>
+        </div>
+    </div>
+   
+  </body>
+</html>
